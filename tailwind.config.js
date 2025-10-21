@@ -4,27 +4,29 @@ export default {
   theme: {
     extend: {
       colors: {
-        ramen: {
-          red: '#D7263D',
-          dark: '#0B0A0A',
-          charcoal: '#111113',
-          cream: '#FFF3E0',
-          beige: '#F7E7CE',
-          gold: '#E0A106',
-          sesame: '#D1C7B7',
-          seaweed: '#1F2937',
-          kimchi: '#B81D24'
+        cafe: {
+          // Menu-inspired colors
+          blue: '#3333CC',        // Royal blue from menu
+          dark: '#333333',        // Dark grey from menu
+          light: '#F5F5F5',       // Light grey background
+          white: '#FFFFFF',       // Pure white
+          // Accent colors
+          accent: '#3333CC',      // Same as blue for consistency
+          text: '#333333',        // Text color
+          muted: '#666666',       // Muted text
         }
       },
-      fontFamily: {
-        'pretendard': ['Pretendard', 'system-ui', 'sans-serif'],
-        'noto-kr': ['Noto Serif KR', 'serif']
-      },
+          fontFamily: {
+            'sans': ['Inter', 'system-ui', 'sans-serif'],
+            'menu': ['Inter', 'system-ui', 'sans-serif'],
+            'display': ['Inter', 'system-ui', 'sans-serif'], // For headings and titles
+          },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
         'slide-up': 'slideUp 0.4s ease-out',
         'bounce-gentle': 'bounceGentle 0.6s ease-out',
-        'scale-in': 'scaleIn 0.3s ease-out'
+        'scale-in': 'scaleIn 0.3s ease-out',
+        'steam': 'steam 2s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -43,8 +45,17 @@ export default {
         scaleIn: {
           '0%': { transform: 'scale(0.95)', opacity: '0' },
           '100%': { transform: 'scale(1)', opacity: '1' }
+        },
+        steam: {
+          '0%, 100%': { transform: 'translateY(0) scale(1)', opacity: '0.3' },
+          '50%': { transform: 'translateY(-10px) scale(1.1)', opacity: '0.6' }
         }
-      }
+      },
+      backgroundImage: {
+        'coffee-gradient': 'linear-gradient(135deg, #3E2723 0%, #5D4037 100%)',
+        'cream-gradient': 'linear-gradient(135deg, #FFF8E1 0%, #FFFBF5 100%)',
+        'warm-gradient': 'linear-gradient(135deg, #FF8A65 0%, #D4A574 100%)',
+      },
     },
   },
   plugins: [],

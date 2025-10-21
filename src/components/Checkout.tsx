@@ -60,7 +60,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
       : '';
     
     const orderDetails = `
-🛒 ClickEats ORDER
+🛒 Adeia Café ORDER
 
 👤 Customer: ${customerName}
 📞 Contact: ${contactNumber}
@@ -90,16 +90,16 @@ ${cartItems.map(item => {
 💰 TOTAL: ₱${totalPrice}
 ${serviceType === 'delivery' ? `🛵 DELIVERY FEE:` : ''}
 
-💳 Payment: ${selectedPaymentMethod?.name || paymentMethod}
-📸 Payment Screenshot: Please attach your payment receipt screenshot
+💳 Payment: ${paymentMethod === 'cash-on-delivery' ? 'Cash on Delivery' : (selectedPaymentMethod?.name || paymentMethod)}
+${paymentMethod === 'cash-on-delivery' ? '💰 Cash Payment: Pay when your order arrives' : '📸 Payment Screenshot: Please attach your payment receipt screenshot'}
 
 ${notes ? `📝 Notes: ${notes}` : ''}
 
-Please confirm this order to proceed. Thank you for choosing ClickEats! 🥟
+Please confirm this order to proceed. Thank you for choosing Adeia Café! 🥟
     `.trim();
 
     const encodedMessage = encodeURIComponent(orderDetails);
-    const messengerUrl = `https://m.me/61579693577478?text=${encodedMessage}`;
+    const messengerUrl = `https://m.me/266225883233377?text=${encodedMessage}`;
     
     window.open(messengerUrl, '_blank');
     
@@ -372,6 +372,21 @@ Please confirm this order to proceed. Thank you for choosing ClickEats! 🥟
           <h2 className="text-2xl font-noto font-medium text-black mb-6">Choose Payment Method</h2>
           
           <div className="grid grid-cols-1 gap-4 mb-6">
+            {/* Cash on Delivery Option */}
+            <button
+              type="button"
+              onClick={() => setPaymentMethod('cash-on-delivery')}
+              className={`p-4 rounded-lg border-2 transition-all duration-200 flex items-center space-x-3 ${
+                paymentMethod === 'cash-on-delivery'
+                  ? 'border-green-600 bg-green-600 text-white'
+                  : 'border-green-300 bg-white text-gray-700 hover:border-green-400'
+              }`}
+            >
+              <span className="text-2xl">💰</span>
+              <span className="font-medium">Cash on Delivery</span>
+            </button>
+            
+            {/* Other Payment Methods */}
             {paymentMethods.map((method) => (
               <button
                 key={method.id}
@@ -389,8 +404,8 @@ Please confirm this order to proceed. Thank you for choosing ClickEats! 🥟
             ))}
           </div>
 
-          {/* Payment Details with QR Code */}
-          {selectedPaymentMethod && (
+          {/* Payment Details */}
+          {selectedPaymentMethod && paymentMethod !== 'cash-on-delivery' && (
             <div className="bg-red-50 rounded-lg p-6 mb-6">
               <h3 className="font-medium text-black mb-4">Payment Details</h3>
               <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -415,13 +430,35 @@ Please confirm this order to proceed. Thank you for choosing ClickEats! 🥟
             </div>
           )}
 
-          {/* Reference Number */}
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-            <h4 className="font-medium text-black mb-2">📸 Payment Proof Required</h4>
-            <p className="text-sm text-gray-700">
-              After making your payment, please take a screenshot of your payment receipt and attach it when you send your order via Messenger. This helps us verify and process your order quickly.
-            </p>
-          </div>
+          {/* Cash on Delivery Details */}
+          {paymentMethod === 'cash-on-delivery' && (
+            <div className="bg-green-50 rounded-lg p-6 mb-6">
+              <h3 className="font-medium text-black mb-4">Cash on Delivery</h3>
+              <div className="flex items-center space-x-3 mb-4">
+                <span className="text-3xl">💰</span>
+                <div>
+                  <p className="text-lg font-semibold text-black">Pay with Cash</p>
+                  <p className="text-sm text-gray-600">Pay when your order arrives</p>
+                </div>
+              </div>
+              <div className="bg-white rounded-lg p-4 border border-green-200">
+                <p className="text-xl font-bold text-green-600">Amount to Pay: ₱{totalPrice}</p>
+                <p className="text-sm text-gray-600 mt-2">
+                  Please have the exact amount ready when the delivery person arrives.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Reference Number - Only for non-COD payments */}
+          {paymentMethod !== 'cash-on-delivery' && (
+            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+              <h4 className="font-medium text-black mb-2">📸 Payment Proof Required</h4>
+              <p className="text-sm text-gray-700">
+                After making your payment, please take a screenshot of your payment receipt and attach it when you send your order via Messenger. This helps us verify and process your order quickly.
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Order Summary */}
@@ -502,7 +539,7 @@ Please confirm this order to proceed. Thank you for choosing ClickEats! 🥟
           </button>
           
           <p className="text-xs text-gray-500 text-center mt-3">
-            You'll be redirected to Facebook Messenger to confirm your order. Don't forget to attach your payment screenshot!
+            You'll be redirected to Facebook Messenger to confirm your order. {paymentMethod === 'cash-on-delivery' ? 'No payment screenshot needed for cash on delivery.' : "Don't forget to attach your payment screenshot!"}
           </p>
         </div>
       </div>

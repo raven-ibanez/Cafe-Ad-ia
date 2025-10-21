@@ -2,14 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Ramen Yard Custom Styles */
-/* Minimal helpers for ramen palette when needed outside tailwind tokens */
-.bg-ramen-cream { background-color: #FFF3E0; }
-.bg-ramen-beige { background-color: #F7E7CE; }
-.text-ramen-red { color: #D7263D; }
-.text-ramen-dark { color: #0B0A0A; }
-.border-ramen-sesame { border-color: #D1C7B7; }
-.ring-ramen-gold { --tw-ring-color: #E0A106; }
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* Adéia Café Custom Styles - Menu Inspired */
+@layer base {
+  body {
+    @apply bg-cafe-light text-cafe-dark antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+  
+  .font-display {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+  }
+}
+
+/* Menu-inspired helpers */
+.bg-menu-pattern {
+  background-color: #F5F5F5;
+}
+
+.menu-card {
+  @apply bg-white border border-gray-200 rounded-lg shadow-sm;
+}
+
+.menu-card-hover {
+  @apply transition-all duration-200 hover:shadow-md;
+}
 
 /* Hide scrollbar for mobile nav */
 .scrollbar-hide {
@@ -21,10 +49,58 @@
   display: none;
 }
 
+/* Custom scrollbar for desktop */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-cafe-light;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-cafe-muted rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-cafe-dark;
+}
+
 /* Image loading optimization */
 img {
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
+}
+
+/* Button styles - Menu inspired */
+.btn-menu {
+  @apply bg-cafe-blue text-white px-6 py-3 rounded-lg font-medium 
+         hover:bg-cafe-blue/90 transition-all duration-200;
+}
+
+.btn-menu-outline {
+  @apply border-2 border-cafe-blue text-cafe-blue px-6 py-3 rounded-lg font-medium
+         hover:bg-cafe-blue hover:text-white transition-all duration-200;
+}
+
+/* Card styles - Clean and simple */
+.menu-card {
+  @apply bg-white border border-gray-200 rounded-lg shadow-sm 
+         transition-all duration-200 overflow-hidden;
+}
+
+/* Badge styles - Simple */
+.badge-popular {
+  @apply bg-cafe-blue text-white text-xs font-medium px-2 py-1 rounded;
+}
+
+.badge-sale {
+  @apply bg-red-500 text-white text-xs font-medium px-2 py-1 rounded;
+}
+
+/* Focus styles */
+*:focus-visible {
+  @apply outline-none ring-2 ring-cafe-blue ring-offset-2;
 }
 
 /* Preload critical images */
@@ -35,4 +111,13 @@ img {
   top: -9999px;
   width: 1px;
   height: 1px;
+}
+
+/* Selection color */
+::selection {
+  @apply bg-cafe-blue text-white;
+}
+
+::-moz-selection {
+  @apply bg-cafe-blue text-white;
 }
