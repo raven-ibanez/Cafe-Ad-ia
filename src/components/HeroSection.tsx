@@ -8,7 +8,7 @@ const HeroSection: React.FC = () => {
           CAFE ADÉIA
         </h1>
         <p className="text-lg text-white/80 mb-8">
-          Premium Coffee & Delicious Treats
+        Sip as Unique as You
         </p>
         <div className="w-16 h-1 bg-white mx-auto"></div>
       </div>

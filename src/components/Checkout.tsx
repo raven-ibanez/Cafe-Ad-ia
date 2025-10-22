@@ -95,7 +95,7 @@ ${paymentMethod === 'cash-on-delivery' ? '💰 Cash Payment: Pay when your order
 
 ${notes ? `📝 Notes: ${notes}` : ''}
 
-Please confirm this order to proceed. Thank you for choosing Adeia Café! 🥟
+ Thank you for choosing Cafe Adéia!
     `.trim();
 
     const encodedMessage = encodeURIComponent(orderDetails);

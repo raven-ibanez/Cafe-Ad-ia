@@ -50,13 +50,13 @@ export interface OrderData {
   // Dine-in specific fields
   partySize?: number;
   dineInTime?: string;
-  paymentMethod: 'gcash' | 'maya' | 'bank-transfer' | 'cash-on-delivery';
+  paymentMethod: PaymentMethod;
   referenceNumber?: string;
   total: number;
   notes?: string;
 }
 
-export type PaymentMethod = 'gcash' | 'maya' | 'bank-transfer' | 'cash-on-delivery';
+export type PaymentMethod = 'gcash' | 'maya' | 'bank-transfer' | 'qr-ph' | 'cash-on-delivery';
 export type ServiceType = 'dine-in' | 'pickup' | 'delivery';
 
 // Site Settings Types
