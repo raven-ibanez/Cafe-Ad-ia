@@ -60,7 +60,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
       : '';
     
     const orderDetails = `
-🛒 Adeia Café ORDER
+🛒 Café Adeia ORDER
 
 👤 Customer: ${customerName}
 📞 Contact: ${contactNumber}
